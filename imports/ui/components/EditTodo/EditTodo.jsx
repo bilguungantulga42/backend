@@ -4,7 +4,7 @@ export const EditTodo = (props) => {
   const { setReset } = props;
   const onSubmit = () => {};
   return (
-    <form onSubmit={onSubmit} className="create">
+    <form onSubmit={onSubmit} className="edit">
       <div className="mb-3">
         <label className="form-label">Titel</label>
         <input type="text" className="form-control" name="title" />
@@ -20,7 +20,7 @@ export const EditTodo = (props) => {
       </div>
       <div className="button-container">
         <button
-          type="submit"
+          type="reset"
           className="btn btn-outline-primary left"
           onClick={setReset}
         >

@@ -13,7 +13,7 @@ export const CreateTodo = (props) => {
       progress: parseInt(progress.value) || 0,
       deadline: deadline.value,
     });
-    setReset();
+    setReset(event);
   };
 
   return (
@@ -33,7 +33,7 @@ export const CreateTodo = (props) => {
       </div>
       <div className="button-container">
         <button
-          type="submit"
+          type="reset"
           className="btn btn-outline-primary left"
           onClick={setReset}
         >
