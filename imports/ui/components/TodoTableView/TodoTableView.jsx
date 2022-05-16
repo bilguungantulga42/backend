@@ -1,21 +1,22 @@
 import React, { useState } from "react";
+import { useTracker } from "meteor/react-meteor-data";
+
 import { CreateTodo } from "../CreateTodo";
 import { EditTodo } from "../EditTodo";
 import { Impressum } from "../Impressum";
-import "./styles.css";
+import { TodoTableRow } from "./TodoTableRow";
+import { TodoTableHead } from "./TodoTableHead";
+import { TodoNavBar } from "./TodoNavBar";
 
-const head = ["Index", "Titel", "Deadline", "Fortschritt"];
-const body = [
-  { title: "Einkaufen", deadline: "13.10.2022", progress: "100%" },
-  { title: "SkSys HA", deadline: "16.01.2025", progress: "50%" },
-  { title: "Zähne putzen", deadline: "01.11.2028", progress: "27%" },
-];
+import { TodosCollection } from "../../../api/todos";
+import "./styles.css";
 
 export const TodoTableView = () => {
   const [visible, setVisible] = useState(true);
   const [showEdit, setShowEdit] = useState(false);
   const [showCreate, setShowCreate] = useState(false);
   const [showImpressum, setShowImpressum] = useState(false);
+  const data = useTracker(() => TodosCollection.find({}).fetch());
 
   const onRowClick = () => {
     setVisible(false);
@@ -45,80 +46,21 @@ export const TodoTableView = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-primary">
-        <div className="container-fluid">
-          <a
-            className="navbar-brand"
-            href={{}}
-            onClick={onReset}
-            style={{ color: "white" }}
-          >
-            TODO Manager
-          </a>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a
-                  className="nav-link active"
-                  aria-current="page"
-                  href={{}}
-                  onClick={onReset}
-                  style={{ color: "white" }}
-                >
-                  Übersicht
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link"
-                  href={{}}
-                  onClick={onImpressumClick}
-                  style={{ color: "white" }}
-                >
-                  Impressum
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <div className="container">
+      <TodoNavBar onReset={onReset} onImpressumClick={onImpressumClick} />
+      <div className="todo">
         {visible && (
           <>
-            <table className="table table-hover">
-              <thead>
-                <tr>
-                  {head.map((value, index) => {
-                    return (
-                      <th key={index} scope="col">
-                        {value}
-                      </th>
-                    );
-                  })}
-                </tr>
-              </thead>
+            <table className="table">
+              <TodoTableHead />
               <tbody>
-                {body.map((value, index) => {
+                {data.map((value, index) => {
                   return (
-                    <tr key={index}>
-                      <th scope="row">{++index}</th>
-                      <td>{value.title}</td>
-                      <td>{value.deadline}</td>
-                      <td>{value.progress}</td>
-                      <td>
-                        <button
-                          className="btn btn-success btn-sm"
-                          onClick={() => onRowClick(value)}
-                        >
-                          Edit
-                        </button>
-                      </td>
-                      <td>
-                        <button className="btn btn-danger btn-sm">
-                          Löschen
-                        </button>
-                      </td>
-                    </tr>
+                    <TodoTableRow
+                      key={index}
+                      element={value}
+                      index={index}
+                      onRowClick={onRowClick}
+                    />
                   );
                 })}
               </tbody>

@@ -1,31 +1,35 @@
-import { Meteor } from 'meteor/meteor';
-import { LinksCollection } from '/imports/api/links';
+import { Meteor } from "meteor/meteor";
+import { TodosCollection } from "../imports/api/todos";
 
-function insertLink({ title, url }) {
-  LinksCollection.insert({title, url, createdAt: new Date()});
+function insertTodo({ title, deadline, progress }) {
+  TodosCollection.insert({ title, deadline, progress, createdAt: new Date() });
 }
 
 Meteor.startup(() => {
-  // If the Links collection is empty, add some data.
-  if (LinksCollection.find().count() === 0) {
-    insertLink({
-      title: 'Do the Tutorial',
-      url: 'https://www.meteor.com/tutorials/react/creating-an-app'
+  // If the Todos collection is empty, add some data.
+  if (TodosCollection.find().count() === 0) {
+    insertTodo({
+      title: "A",
+      deadline: "2022-05-13",
+      progress: 75,
     });
 
-    insertLink({
-      title: 'Follow the Guide',
-      url: 'http://guide.meteor.com'
+    insertTodo({
+      title: "B",
+      deadline: "2022-05-16",
+      progress: 100,
     });
 
-    insertLink({
-      title: 'Read the Docs',
-      url: 'https://docs.meteor.com'
+    insertTodo({
+      title: "C",
+      deadline: "2022-05-20",
+      progress: 0,
     });
 
-    insertLink({
-      title: 'Discussions',
-      url: 'https://forums.meteor.com'
+    insertTodo({
+      title: "D",
+      deadline: "2022-05-20",
+      progress: 31,
     });
   }
 });

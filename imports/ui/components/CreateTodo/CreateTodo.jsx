@@ -1,23 +1,35 @@
 import React from "react";
+import { TodosCollection } from "../../../api/todos";
 import "./styles.css";
 
 export const CreateTodo = (props) => {
   const { setReset } = props;
 
+  const onSubmit = (event) => {
+    event.preventDefault();
+    const { title, progress, deadline } = event.target;
+    TodosCollection.insert({
+      title: title.value,
+      progress: parseInt(progress.value) || 0,
+      deadline: deadline.value,
+    });
+    setReset();
+  };
+
   return (
-    <form>
+    <form className="create" onSubmit={onSubmit}>
       <div className="mb-3">
         <label className="form-label">Titel</label>
-        <input type="text" className="form-control" />
+        <input type="text" className="form-control" name="title" />
         <div className="form-text">Weniger als 160 Zeichen</div>
       </div>
       <div className="mb-3">
         <label className="form-label">Deadline</label>
-        <input type="date" className="form-control" />
+        <input type="date" className="form-control" name="deadline" />
       </div>
       <div className="mb-3">
         <label className="form-label">Fortschritt (in %)</label>
-        <input type="text" className="form-control" />
+        <input type="text" className="form-control" name="progress" />
       </div>
       <div className="button-container">
         <button
@@ -40,15 +52,10 @@ export const CreateTodo = (props) => {
           </svg>
           Zurück
         </button>
-        <button
-          type="submit"
-          className="btn btn-primary right"
-          onClick={setReset}
-        >
+        <button type="submit" className="btn btn-primary right">
           + TODO erstellen
         </button>
       </div>
     </form>
   );
 };
-

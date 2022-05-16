@@ -2,20 +2,21 @@ import React from "react";
 
 export const EditTodo = (props) => {
   const { setReset } = props;
+  const onSubmit = () => {};
   return (
-    <form>
+    <form onSubmit={onSubmit} className="create">
       <div className="mb-3">
         <label className="form-label">Titel</label>
-        <input type="text" className="form-control" />
+        <input type="text" className="form-control" name="title" />
         <div className="form-text">Weniger als 160 Zeichen</div>
       </div>
       <div className="mb-3">
         <label className="form-label">Deadline</label>
-        <input type="date" className="form-control" />
+        <input type="date" className="form-control" name="deadline" />
       </div>
       <div className="mb-3">
         <label className="form-label">Fortschritt (in %)</label>
-        <input type="text" className="form-control" />
+        <input type="text" className="form-control" name="progress" />
       </div>
       <div className="button-container">
         <button
@@ -38,15 +39,10 @@ export const EditTodo = (props) => {
           </svg>
           Zurück
         </button>
-        <button
-          type="submit"
-          className="btn btn-primary right"
-          onClick={setReset}
-        >
+        <button type="submit" className="btn btn-primary right">
           Änderungen speichern
         </button>
       </div>
     </form>
   );
 };
-
