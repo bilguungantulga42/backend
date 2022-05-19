@@ -1,13 +1,9 @@
-import React, { useState } from "react";
-import { TodosCollection } from "../../../api/todos";
+import React from "react";
 import "./styles.css";
-
 
 export const TodoTableRow = (props) => {
   const { element, index, onRowClick, onDeleteClick } = props;
   const { title, progress, deadline } = element;
-  useState;
-
 
   return (
     <tr>
@@ -24,9 +20,9 @@ export const TodoTableRow = (props) => {
         </button>
       </td>
       <td>
-        <button 
-        className="btn btn-danger btn-sm" 
-        onClick={() => onDeleteClick(element)}
+        <button
+          className="btn btn-danger btn-sm"
+          onClick={() => onDeleteClick(element)}
         >
           Löschen
         </button>
