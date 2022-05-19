@@ -1,22 +1,37 @@
 import React from "react";
 
 export const EditTodo = (props) => {
-  const { setReset } = props;
+  const { setReset, element } = props;
   const onSubmit = () => {};
   return (
     <form onSubmit={onSubmit} className="edit">
       <div className="mb-3">
         <label className="form-label">Titel</label>
-        <input type="text" className="form-control" name="title" />
+        <input
+          type="text"
+          className="form-control"
+          name="title"
+          defaultValue={element.title}
+        />
         <div className="form-text">Weniger als 160 Zeichen</div>
       </div>
       <div className="mb-3">
         <label className="form-label">Deadline</label>
-        <input type="date" className="form-control" name="deadline" />
+        <input
+          type="date"
+          className="form-control"
+          name="deadline"
+          defaultValue={element.deadline}
+        />
       </div>
       <div className="mb-3">
         <label className="form-label">Fortschritt (in %)</label>
-        <input type="text" className="form-control" name="progress" />
+        <input
+          type="text"
+          className="form-control"
+          name="progress"
+          defaultValue={element.progress}
+        />
       </div>
       <div className="button-container">
         <button

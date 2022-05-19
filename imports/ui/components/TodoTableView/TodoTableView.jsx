@@ -16,9 +16,12 @@ export const TodoTableView = () => {
   const [showEdit, setShowEdit] = useState(false);
   const [showCreate, setShowCreate] = useState(false);
   const [showImpressum, setShowImpressum] = useState(false);
+  const [currentElement, setCurrentElement] = useState(null);
+
   const data = useTracker(() => TodosCollection.find({}).fetch());
 
-  const onRowClick = () => {
+  const onEditClick = (element) => {
+    setCurrentElement(element)
     setVisible(false);
     setShowEdit(true);
   };
@@ -61,7 +64,7 @@ export const TodoTableView = () => {
                       key={index}
                       element={value}
                       index={index}
-                      onRowClick={onRowClick}
+                      onEditClick={onEditClick}
                       onDeleteClick={onDeleteClick}
                     />
                   );
@@ -73,7 +76,7 @@ export const TodoTableView = () => {
             </button>
           </>
         )}
-        {showEdit && <EditTodo setReset={onReset} />}
+        {showEdit && <EditTodo setReset={onReset} element={currentElement} />}
         {showCreate && <CreateTodo setReset={onReset} />}
         {showImpressum && <Impressum />}
       </div>

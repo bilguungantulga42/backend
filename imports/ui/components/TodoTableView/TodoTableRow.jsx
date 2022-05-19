@@ -4,7 +4,7 @@ import "./styles.css";
 
 
 export const TodoTableRow = (props) => {
-  const { element, index, onRowClick, onDeleteClick } = props;
+  const { element, index, onEditClick, onDeleteClick } = props;
   const { title, progress, deadline } = element;
   useState;
 
@@ -18,7 +18,7 @@ export const TodoTableRow = (props) => {
       <td>
         <button
           className="btn btn-success btn-sm"
-          onClick={() => onRowClick(element)}
+          onClick={() => onEditClick(element)}
         >
           Edit
         </button>
