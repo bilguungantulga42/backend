@@ -23,7 +23,7 @@ export const TodoTableView = () => {
     setShowEdit(true);
   };
 
-  const onDeleteClick = ({index}) => TodosCollection.remove(index);
+  const onDeleteClick = ({ _id }) => TodosCollection.remove(_id);
 
   const onCreateClick = () => {
     setVisible(false);
