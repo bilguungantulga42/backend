@@ -23,6 +23,8 @@ export const TodoTableView = () => {
     setShowEdit(true);
   };
 
+  const onDeleteClick = ({index}) => TodosCollection.remove(index);
+
   const onCreateClick = () => {
     setVisible(false);
     setShowCreate(true);
@@ -60,6 +62,7 @@ export const TodoTableView = () => {
                       element={value}
                       index={index}
                       onRowClick={onRowClick}
+                      onDeleteClick={onDeleteClick}
                     />
                   );
                 })}
