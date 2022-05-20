@@ -21,7 +21,7 @@ export const TodoTableView = () => {
   const data = useTracker(() => TodosCollection.find({}).fetch());
 
   const onEditClick = (element) => {
-    setCurrentElement(element)
+    setCurrentElement(element);
     setVisible(false);
     setShowEdit(true);
   };
