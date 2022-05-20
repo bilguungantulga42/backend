@@ -18,7 +18,7 @@ export const EditTodo = (props) => {
 
 
   return (
-    <form className="edit" onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="edit">
       <div className="mb-3">
         <label className="form-label">Titel</label>
         <input
