@@ -20,3 +20,16 @@ Run it:
 cd my-app
 meteor
 ```
+
+Or init existing project:
+
+
+```bash
+cd my-app
+meteor npm install
+```
+Run it:
+
+```bash
+meteor
+```
