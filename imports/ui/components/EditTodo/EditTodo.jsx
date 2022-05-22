@@ -1,8 +1,22 @@
 import React from "react";
+import { TodosCollection } from "../../../api/todos";
+
 
 export const EditTodo = (props) => {
   const { setReset, element } = props;
-  const onSubmit = () => {};
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    const { title, progress, deadline } = event.target;
+    TodosCollection.update(
+      {_id: element._id},
+      {title: title.value,
+      progress: parseInt(progress.value) || 0,
+      deadline: deadline.value});
+    setReset(event);
+  };
+
+
   return (
     <form onSubmit={onSubmit} className="edit">
       <div className="mb-3">
