@@ -1,7 +1,6 @@
 import React from "react";
 import { TodosCollection } from "../../../api/todos";
 
-
 export const EditTodo = (props) => {
   const { setReset, element } = props;
 
@@ -9,13 +8,15 @@ export const EditTodo = (props) => {
     event.preventDefault();
     const { title, progress, deadline } = event.target;
     TodosCollection.update(
-      {_id: element._id},
-      {title: title.value,
-      progress: parseInt(progress.value) || 0,
-      deadline: deadline.value});
+      { _id: element._id },
+      {
+        title: title.value,
+        progress: parseInt(progress.value) || 0,
+        deadline: deadline.value,
+      }
+    );
     setReset(event);
   };
-
 
   return (
     <form onSubmit={onSubmit} className="edit">
@@ -26,6 +27,8 @@ export const EditTodo = (props) => {
           className="form-control"
           name="title"
           defaultValue={element.title}
+          required
+          maxLength={160}
         />
         <div className="form-text">Weniger als 160 Zeichen</div>
       </div>
@@ -36,15 +39,19 @@ export const EditTodo = (props) => {
           className="form-control"
           name="deadline"
           defaultValue={element.deadline}
+          required
         />
       </div>
       <div className="mb-3">
         <label className="form-label">Fortschritt (in %)</label>
         <input
-          type="text"
+          type="number"
           className="form-control"
           name="progress"
           defaultValue={element.progress}
+          required
+          min={0}
+          max={100}
         />
       </div>
       <div className="button-container">

@@ -20,16 +20,29 @@ export const CreateTodo = (props) => {
     <form className="create" onSubmit={onSubmit}>
       <div className="mb-3">
         <label className="form-label">Titel</label>
-        <input type="text" className="form-control" name="title" />
+        <input
+          type="text"
+          className="form-control"
+          name="title"
+          required
+          maxLength={160}
+        />
         <div className="form-text">Weniger als 160 Zeichen</div>
       </div>
       <div className="mb-3">
         <label className="form-label">Deadline</label>
-        <input type="date" className="form-control" name="deadline" />
+        <input type="date" className="form-control" name="deadline" required />
       </div>
       <div className="mb-3">
         <label className="form-label">Fortschritt (in %)</label>
-        <input type="text" className="form-control" name="progress" />
+        <input
+          type="number"
+          className="form-control"
+          name="progress"
+          required
+          min={0}
+          max={100}
+        />
       </div>
       <div className="button-container">
         <button
